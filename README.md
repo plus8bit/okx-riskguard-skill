@@ -4,7 +4,7 @@ Protective trading Skill for the OKX Agentic Wallet Trading Competition.
 
 ## Live Demo & Video
 
-- Live demo: `VERCEL_URL_PLACEHOLDER`
+- Live demo: `https://okx-riskguard-skill.vercel.app`
 - Demo video: `YOUTUBE_URL_PLACEHOLDER`
 
 Onchain RiskGuard runs before a swap/trade intent. It checks token liquidity, volume, volatility, pair age, order-flow balance, safe position size, and exit plan. If a token fails minimum safety thresholds, the Skill instructs the agent not to call swap execution.
