@@ -1,0 +1,22 @@
+{
+  "name": "onchain-riskguard",
+  "displayName": "Onchain RiskGuard",
+  "version": "0.1.0",
+  "creator": "plus8bit",
+  "description": "Protective pre-trade strategy skill for OKX Agentic Wallet. It scores token risk, blocks unsafe swaps, computes position sizing, and generates an exit plan before calling swap execution.",
+  "category": "trading-risk-control",
+  "chains": ["solana", "base", "ethereum", "bsc", "arbitrum", "polygon"],
+  "requires": [
+    "okx-dex-token",
+    "okx-security",
+    "okx-dex-market",
+    "okx-dex-swap",
+    "okx-onchain-gateway"
+  ],
+  "security": {
+    "storesPrivateKeys": false,
+    "storesApiKeys": false,
+    "executesTradesDirectly": false,
+    "requiresUserConfirmationForSwap": true
+  }
+}
