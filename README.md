@@ -23,8 +23,8 @@ Agentic trading needs a policy layer before execution. A trading agent can fetch
 
 ## Local Setup
 
-```bash
-cd /Users/nickdanilov/Documents/Codex/2026-04-30/https-superteam-fun-https-superteam-fun/okx-riskguard-skill
+```git clone https://github.com/plus8bit/okx-riskguard-skill.git
+cd okx-riskguard-skill
 npm install
 npm run dev
 ```
