@@ -57,6 +57,188 @@ Output schema:
 }
 ```
 
+### Example Reports
+
+#### PASS
+
+```json
+{
+  "token": {
+    "chainId": "solana",
+    "address": "So11111111111111111111111111111111111111112",
+    "symbol": "SOL",
+    "name": "Wrapped SOL",
+    "priceUsd": 154.22
+  },
+  "metrics": {
+    "bestPair": "main-sol-usdc-pair",
+    "dexId": "raydium",
+    "liquidityUsd": 5600000,
+    "volume24hUsd": 11800000,
+    "priceChange1hPct": 0.7,
+    "priceChange24hPct": 3.4,
+    "buySellImbalance24h": 0.03,
+    "marketCapUsd": 88000000000,
+    "pairAgeHours": 21600
+  },
+  "score": 100,
+  "verdict": "pass",
+  "allowed": true,
+  "recommendedPositionUsd": 100,
+  "maxPositionUsd": 173.88,
+  "slippageCapPct": 1,
+  "flags": [
+    {
+      "id": "clean_market_snapshot",
+      "severity": "pass",
+      "label": "No hard risk flags",
+      "evidence": "Liquidity, volume, volatility, and flow checks passed current thresholds."
+    }
+  ],
+  "exitPlan": {
+    "stopLossPct": 8,
+    "takeProfitPct": 22,
+    "dcaOut": [
+      {
+        "triggerPct": 12,
+        "sellPct": 33
+      },
+      {
+        "triggerPct": 22,
+        "sellPct": 33
+      },
+      {
+        "triggerPct": 35,
+        "sellPct": 34
+      }
+    ]
+  },
+  "agentInstruction": "If the user confirms, call okx-dex-swap with max trade size $100.00, slippage cap 1%, then call okx-onchain-gateway simulation before broadcast."
+}
+```
+
+#### CAUTION
+
+```json
+{
+  "token": {
+    "chainId": "base",
+    "address": "0xexamplecautiontoken",
+    "symbol": "MID",
+    "name": "Medium Risk Token",
+    "priceUsd": 0.084
+  },
+  "metrics": {
+    "bestPair": "base-mid-weth-pair",
+    "dexId": "uniswap",
+    "liquidityUsd": 135000,
+    "volume24hUsd": 41000,
+    "priceChange1hPct": 18.6,
+    "priceChange24hPct": 34.2,
+    "buySellImbalance24h": 0.43,
+    "marketCapUsd": 9200000,
+    "pairAgeHours": 162
+  },
+  "score": 64,
+  "verdict": "caution",
+  "allowed": true,
+  "recommendedPositionUsd": 42.5,
+  "maxPositionUsd": 42.5,
+  "slippageCapPct": 0.5,
+  "flags": [
+    {
+      "id": "thin_liquidity",
+      "severity": "caution",
+      "label": "Thin liquidity",
+      "evidence": "Primary pair liquidity is $135,000."
+    },
+    {
+      "id": "high_daily_volatility",
+      "severity": "caution",
+      "label": "High 24h volatility",
+      "evidence": "24h price change is 34.20%."
+    }
+  ],
+  "exitPlan": {
+    "stopLossPct": 5,
+    "takeProfitPct": 14,
+    "dcaOut": [
+      {
+        "triggerPct": 8,
+        "sellPct": 50
+      },
+      {
+        "triggerPct": 14,
+        "sellPct": 50
+      }
+    ]
+  },
+  "agentInstruction": "If the user confirms, call okx-dex-swap with reduced size $42.50, slippage cap 0.5%, then call okx-onchain-gateway simulation before broadcast."
+}
+```
+
+#### BLOCK
+
+```json
+{
+  "token": {
+    "chainId": "bsc",
+    "address": "0xexamplescamtoken",
+    "symbol": "RUG",
+    "name": "Unsafe Token",
+    "priceUsd": 0.000031
+  },
+  "metrics": {
+    "bestPair": "bsc-rug-usdt-pair",
+    "dexId": "pancakeswap",
+    "liquidityUsd": 11800,
+    "volume24hUsd": 3200,
+    "priceChange1hPct": 41.5,
+    "priceChange24hPct": -72.8,
+    "buySellImbalance24h": 0.91,
+    "marketCapUsd": 410000,
+    "pairAgeHours": 7.4
+  },
+  "score": 0,
+  "verdict": "block",
+  "allowed": false,
+  "recommendedPositionUsd": 0,
+  "maxPositionUsd": 0,
+  "slippageCapPct": 0,
+  "flags": [
+    {
+      "id": "low_liquidity",
+      "severity": "block",
+      "label": "Minimum liquidity check failed",
+      "evidence": "Primary pair liquidity is $11,800."
+    },
+    {
+      "id": "one_sided_flow",
+      "severity": "caution",
+      "label": "One-sided order flow",
+      "evidence": "24h buy/sell imbalance is 91.0%."
+    },
+    {
+      "id": "new_pair",
+      "severity": "caution",
+      "label": "New liquidity pair",
+      "evidence": "Primary pair age is 7.4 hours."
+    }
+  ],
+  "exitPlan": {
+    "stopLossPct": 3,
+    "takeProfitPct": 8,
+    "dcaOut": [
+      {
+        "triggerPct": 6,
+        "sellPct": 100
+      }
+    ]
+  },
+  "agentInstruction": "Do not call okx-dex-swap. Explain the failed checks and ask for a different token."
+}
+```
+
 ### 3. Market Data Connector
 
 Path: `src/lib/dexscreener.ts`

@@ -5,6 +5,11 @@ description: Protective pre-trade strategy skill for OKX Agentic Wallet. Use bef
 
 # Onchain RiskGuard
 
+## Live Demo & Video
+
+- Live demo: `VERCEL_URL_PLACEHOLDER`
+- Demo video: `YOUTUBE_URL_PLACEHOLDER`
+
 ## Purpose
 
 Use this Skill before executing a token buy or swap through Agentic Wallet. The Skill returns one of three decisions:

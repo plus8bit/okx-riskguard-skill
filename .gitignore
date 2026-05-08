@@ -11,4 +11,5 @@ coverage
 *.tar
 *.tgz
 *.tsbuildinfo
+submission-okx.md
 .DS_Store
