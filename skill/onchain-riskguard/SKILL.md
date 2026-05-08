@@ -8,7 +8,7 @@ description: Protective pre-trade strategy skill for OKX Agentic Wallet. Use bef
 ## Live Demo & Video
 
 - Live demo: `https://okx-riskguard-skill.vercel.app`
-- Demo video: `YOUTUBE_URL_PLACEHOLDER`
+- Demo video: `https://youtu.be/JR-LNfxDXaU`
 
 ## Purpose
 
